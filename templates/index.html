@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canoe challenge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <h1>Reddit Posts</h1>
+    <form method="post" action="/">
+        <label for="subreddits">Enter Subreddits (comma-separated):</label>
+        <input type="text" id="subreddits" name="subreddits" required>
+        <button type="submit">Fetch</button>
+    </form>
+    <form method="get" action="/">
+        <label for="filter_type">Filter by:</label>
+        <select id="filter_type" name="filter_type">
+            <option value="subreddit">Subreddit</option>
+            <option value="title">Title</option>
+            <option value="author">Author</option>
+            <option value="date">Date</option>
+        </select>
+        <input type="text" id="filter" name="filter" placeholder="Enter filter value">
+        <button type="submit">Filter</button>
+    </form>
+    <form method="post" action="/clear">
+        <button type="submit">Clear Data</button>
+    </form>
+    <table border="1">
+        <tr>
+            <th>Subreddit</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Date</th>
+        </tr>
+        {% for post in posts %}
+        <tr>
+            <td>{{ post.subreddit }}</td>
+            <td>{{ post.title }}</td>
+            <td>{{ post.author }}</td>
+            <td>{{ post.date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
